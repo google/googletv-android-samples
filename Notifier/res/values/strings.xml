@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2011 Google Inc. All Rights Reserved. Licensed under the Apache 
+	License, Version 2.0 (the "License"); you may not use this file except in 
+	compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+	Unless required by applicable law or agreed to in writing, software distributed 
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+	the specific language governing permissions and limitations under the License. -->
+<resources>
+	<string name="hello">Hello World, NotificationActivity!</string>
+	<string name="app_name">Notifier</string>
+	<string name="btn_text_no_toast">Notification without toast</string>
+	<string name="btn_text_toast">Default Notification</string>
+	<string name="btn_custom_notify">Custom notification </string>
+	<string name="btn_ongoing_notify">Ongoing notification </string>
+	<string name="title">This is a Sample app for Google TV Notifications.
+	</string>
+	<string name="content_title">This is a default notification
+	</string>
+	<string name="content_text">Click to launch the App</string>
+	<string name="content_title1">Title goes here....
+	</string>
+	<string name="content_text1">More details</string>
+	<string name="ticker_text">You have a new notification!</string>
+	<string name="custom_notification">Custom notification with a custom image and text color </string>
+	<string name="ticker_text1">You have a new custom notification</string>
+	<string name="ticker_text2">This is an ongoing notification</string>
+	<string name="ongoing_content_title">Ongoing notification </string>
+	<string name="ongoing_content_text">Can n\'t be dismissed using \'Clear\' button</string>
+</resources>
