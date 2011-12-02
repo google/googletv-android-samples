@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2011 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#ff444444"
+                android:padding="5dp">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/searchbar"
+        android:orientation="horizontal"
+        android:layout_gravity="center_vertical"
+        android:background="#ff444444"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <EditText
+                android:id="@+id/searchtext"
+                android:singleLine="true"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:focusable="true"
+                android:hint="@string/hint_search"/>
+        <ImageView
+                 android:id="@+id/bookmark"
+                 android:layout_height="wrap_content"
+                 android:layout_width="wrap_content"
+                 android:gravity="center"
+                 android:clickable="true"
+                 android:focusable="true"
+                 android:src="@drawable/btn_fullscreen"
+                 android:background="@drawable/fullscreen_btn_bg_gradient"
+                 android:layout_toRightOf="@id/searchtext"
+                 android:onClick="onFullScreenClicked"/>
+    </LinearLayout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent">
+        <RelativeLayout
+            android:id="@+id/control_panel"
+            android:layout_gravity="fill"
+            android:background="#ff444444"
+            android:layout_marginRight="3dp"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+           <ImageView
+                android:id="@+id/sat_mode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:focusable="true"
+                android:clickable="true"
+                android:scaleType="center"
+                android:onClick="onSatModeClicked"
+                android:src="@drawable/ic_menu_satmode"
+                android:background="@drawable/button_bg_gradient"
+                />
+            <ImageView
+                android:id="@+id/divider_sat_mode"
+                android:layout_width="1dip"
+                android:layout_height="48dip"
+                android:layout_toRightOf="@id/sat_mode"
+                android:src="@drawable/gray_divider"/>
+            <ImageView
+                android:id="@+id/map_mode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:focusable="true"
+                android:clickable="true"
+                android:scaleType="center"
+                android:onClick="onMapModeClicked"
+                android:src="@drawable/ic_menu_mapmode"
+                android:layout_toRightOf="@id/divider_sat_mode"
+                android:background="@drawable/button_bg_gradient"
+                />
+            <ImageView
+                android:id="@+id/divider_map_mode"
+                android:layout_width="1dip"
+                android:layout_height="48dip"
+                android:layout_toRightOf="@id/map_mode"
+                android:src="@drawable/gray_divider"/>
+            <ImageView
+                android:id="@+id/traffic_mode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:focusable="true"
+                android:clickable="true"
+                android:onClick="onTrafficModeClicked"
+                android:scaleType="center"
+                android:layout_toRightOf="@id/divider_map_mode"
+                android:src="@drawable/ic_menu_trafficmode"
+                android:background="@drawable/button_bg_gradient"
+                />
+                <!-- D-Pad controls  -->
+         <ImageView
+                android:id="@+id/up_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:focusable="true"
+                android:clickable="true"
+                android:scaleType="center"
+                android:onClick="onUpArrowClicked"
+                android:layout_centerInParent="true"
+                android:layout_alignRight="@id/map_mode"
+                android:layout_marginTop="35dp"
+                android:src="@drawable/up"
+                android:background="@drawable/button_bg_gradient"
+                />
+            <ImageView
+                android:id="@+id/divider_up_arrow"
+                android:layout_width="48dip"
+                android:layout_height="1dip"
+                android:layout_below="@id/up_arrow"
+                android:layout_alignRight="@id/up_arrow"
+                android:src="@drawable/gray_divider"/>
+            <ImageView
+                android:id="@+id/down_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:focusable="true"
+                android:clickable="true"
+                android:scaleType="center"
+                android:onClick="onDownArrowClicked"
+                android:src="@drawable/down"
+                android:layout_below="@id/divider_up_arrow"
+                android:layout_alignRight="@id/divider_up_arrow"
+                android:background="@drawable/button_bg_gradient"
+                />
+            <ImageView
+                android:id="@+id/divider_down_arrow"
+                android:layout_width="1dip"
+                android:layout_height="48dip"
+                android:layout_toLeftOf="@id/down_arrow"
+                android:layout_below="@id/divider_up_arrow"
+                android:src="@drawable/gray_divider"/>
+            <ImageView
+                android:id="@+id/left_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:focusable="true"
+                android:clickable="true"
+                android:scaleType="center"
+                android:onClick="onLeftArrowClicked"
+                android:layout_toLeftOf="@id/divider_down_arrow"
+                android:layout_below="@id/divider_up_arrow"
+                android:src="@drawable/left"
+                android:background="@drawable/button_bg_gradient"
+                />
+            <ImageView
+                android:id="@+id/divider_right_arrow"
+                android:layout_width="1dip"
+                android:layout_height="48dip"
+                android:layout_toRightOf="@id/down_arrow"
+                android:layout_below="@id/divider_up_arrow"
+                android:src="@drawable/gray_divider"/>
+            <ImageView
+                android:id="@+id/right_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:focusable="true"
+                android:clickable="true"
+                android:scaleType="center"
+                android:onClick="onRightArrowClicked"
+                android:layout_toRightOf="@id/divider_right_arrow"
+                android:layout_below="@id/divider_up_arrow"
+                android:src="@drawable/right"
+                android:background="@drawable/button_bg_gradient"
+                />
+            </RelativeLayout>
+        <!-- Mapview to show the map on the activity. -->
+        <!-- Please subscribe for Maps key and use your apiKey to make your app work-->
+        <com.google.android.maps.MapView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/mapview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:layout_below="@id/searchbar"
+            android:clickable="true"
+            android:focusable="false"
+            android:apiKey="your_api_key"
+        />
+   </LinearLayout>
+</LinearLayout>

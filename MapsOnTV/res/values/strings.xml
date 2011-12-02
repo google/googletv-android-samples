@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2011 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+  <string
+    name="app_name">Maps On Tv</string>
+  <!-- Label in front of search bar -->
+  <string
+    name="hint_search">Search Location</string>
+  <string
+    name="button_goSearch">Go</string>
+  
+  <!-- Error Message when no location found on address search -->
+  <string
+    name="error_message">Could not find this location. Please check the address again!</string>
+
+
+  <!-- Strings for Menu item -->
+  <string
+    name="menu_map">Map</string>
+  <string
+    name="menu_satellite">Satellite</string>
+  <string
+    name="menu_help">Help</string>
+  <string
+    name="menu_traffic">Traffic</string>
+
+  <!-- Strings for Help Screen -->
+  <string
+    name="dialog_help_text">Search a location and switch the map display mode from map, satellite or traffic.\n \n
+    Please use full screen button to see the map in full screen. Direction
+    pad will help you to pan through the map and on full-screen mode use the direction pad on keyboard. FN key
+    along with +/- key will zoom in/out the map. Use Menu key to switch to
+    map/satellite/traffic modes.\n
+  </string>
+  <string
+    name="dialog_button_ok">Ok</string>
+  <string
+    name="dialog_title">Help</string>
+</resources>
