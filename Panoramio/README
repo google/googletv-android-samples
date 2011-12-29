@@ -1,0 +1,26 @@
+Panoramio lets users browse photos of places around the world.
+It is a simple Google TV client for Google Panoramio service.
+
+Features include:
+- View photos of current location by default.
+- Search for any place to view popular photos from Panoramio for that location.
+- Browse photos of a list of cool places.
+- View slideshow of all photos.
+
+
+To BUILD the project with Eclipse:
+- Import the LeftNavBarLibrary library project into Eclipse.
+    http://code.google.com/p/googletv-android-samples/source/browse/#git%2FLeftNavBarLibrary
+- Import Panoramio project into Eclipse and update its properties:
+    In Properties for Panoramio > Android > Library > Add, select
+    LeftNavBarLibrary.
+    
+    
+The app source code demonstrates how-to:
+- Use Google TV left navigation bar.
+- Create smooth slideshow animations.
+- Make UI D-pad navigable.
+- Use Fragments to make good use of landscape screen space.
+- Use StateListDrawables to visually indicate focussed and selected items.
+- Manage downloading and displaying high resolution images on Google TV.
+- Using AsyncTask for network operations.
