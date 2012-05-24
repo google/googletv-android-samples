@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2012 Google Inc.  All rights reserved.
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+
+  <string name="app_name">Google TV Anymote Library</string>
+  <string name="unkown_tgt_name">Unknown</string>
+  <string name="unkown_tgt_addr">unknown address</string>
+  <string name="ok_text">OK</string>
+
+  <!-- Manifest labels -->
+  <string name="core_service_label">Google TV Anymote Client Service</string>
+  <string name="finder_label">Connect to Google TV</string>
+  <string name="config_page_label">Your build is:</string>
+
+  <!--  Device Finder - more devices -->
+  <string name="finder_searching">Searching for Remote Google TV devices...</string>
+  <string name="finder_wifi_waiting">Waiting for WiFi network.</string>
+  <string name="finder_add_other">Add other device</string>
+  <string name="finder_connect">Connect</string>
+  <string name="finder_cancel">Cancel</string>
+  <string name="finder_manual">Add manually</string>
+  <string name="finder_rescan">Scan again</string>
+  <string name="finder_configure">Configure</string>
+  <string name="finder_retry">Retry</string>
+  <string name="finder_wifi_not_available">WiFi network not available</string>
+  <string name="finder_recently_connected">Recently connected devices</string>
+
+  <!-- Manual IP dialog strings -->
+  <string name="manual_ip_label">Add Google TV</string>
+  <string name="manual_ip_entry_label">IP Address</string>
+  <string name="manual_ip_hint">xxx.xxx.xxx.xxx</string>
+  <string name="manual_ip_message">You can find IP address of your Google TV device by going to:\nSettings &gt; Network &gt; Network Information</string>
+  <string name="manual_ip_error_address">Invalid address.</string>
+  <string name="manual_ip_default_box_name">Unknown box</string>
+  <string name="manual_ip_connect">Connect</string>
+  <string name="manual_ip_cancel">Cancel</string>
+
+  
+  <!-- Pairing -->
+  <string name="pairing_connecting">Connecting</string>
+  <string name="pairing_label">Pairing required</string>
+  <string name="pairing_hint">Enter PIN</string>
+  <string name="pairing_ok">Pair</string>
+  <string name="pairing_cancel">Cancel</string>
+  <string name="pairing_failed_toast">Pairing failed</string>
+  <string name="pairing_succeeded_toast">Pairing succeeded</string>
+  <string name="pairing_cancelled_toast">Pairing cancelled</string>
+  <string name="pairing_waiting">Waiting for pairing code</string>
+  <string name="pairing_scan_qrcode">Scan QR code</string>
+  <string name="pairing_or_text">or</string>
+
+  <!-- Some common stuff -->
+  <string name="cancel">Cancel</string>
+</resources>

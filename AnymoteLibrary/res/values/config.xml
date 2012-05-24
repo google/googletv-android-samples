@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2012 Google Inc.  All rights reserved.
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+  <integer name="fading_text_timeout">1500</integer>
+  <integer name="manual_default_port">9551</integer>
+  <integer name="search_query_delay">1500</integer>
+  <integer name="connection_post_pairing_delay">3000</integer>
+  <integer name="connection_reconnection_delay">1000</integer>
+  <integer name="broadcast_timeout">3000</integer>
+  <integer name="gtv_finder_reconnect_delay">2000</integer>
+  <integer name="gtv_finder_wifi_probe_interval">100</integer>
+  <integer name="gtv_finder_wifi_enable_timeout">10000</integer>
+  <integer name="dpad_drag_timeout">250</integer>
+  <integer name="dpad_drag_radius">10</integer>
+  <integer name="dpad_vibrate_time">40</integer>
+  <integer name="recently_connected_count">8</integer>
+  <integer name="zoom_threshold">20</integer>
+  <integer name="dpad_threshold">80</integer>
+  <integer name="scroll_amount">20</integer>
+  <integer name="timeout_screen_dim">3</integer>
+  <integer name="screen_brightness_dimmed">1</integer>
+</resources>

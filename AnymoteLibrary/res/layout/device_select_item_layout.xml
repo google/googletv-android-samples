@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2012 Google Inc.  All rights reserved.
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<view xmlns:android="http://schemas.android.com/apk/res/android"
+    class="com.example.google.tv.anymotewithpairing.DeviceSelectDialog$ListEntryView"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:padding="2dip"
+    >
+  <LinearLayout
+      android:orientation="vertical"
+      android:layout_weight="1"
+      android:layout_width="fill_parent"
+      android:padding="4dip"
+      android:layout_height="wrap_content">
+    <TextView
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+      android:layout_gravity="center|center_vertical"
+      android:ellipsize="marquee"
+      android:text="Name placeholder"
+      android:id="@+id/device_select_item_name"
+      android:textSize="24.0sp"/>
+    <TextView
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+      android:layout_gravity="center|center_vertical"
+      android:text="Location placeholder"
+      android:id="@+id/device_select_item_address"/>
+  </LinearLayout>
+  <ImageView
+      android:src="@android:drawable/ic_dialog_info"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center|center_vertical"
+      android:layout_weight="0"
+      android:padding="6dip"
+      android:id="@+id/device_select_item_image" />
+</view>
