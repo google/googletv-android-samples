@@ -114,13 +114,7 @@ public class BlackJackRemoteActivity extends Activity implements ClientListener 
                     Toast.LENGTH_LONG).show();
             return;
         }
-        new Thread(new Runnable() {
-            public void run() {
-
-                anymoteSender.sendKeyPress(keyEvent);
-
-            }
-        }).start();
+        anymoteSender.sendKeyPress(keyEvent);
     }
 
     /** Defines callbacks for service binding, passed to bindService() */
@@ -147,17 +141,13 @@ public class BlackJackRemoteActivity extends Activity implements ClientListener 
                 .show();
 
         this.anymoteSender = anymoteSender;
-        if (anymoteSender != null) {
-            // Send Intent to launch BlackJack app on Google TV through Anymote.
-            final Intent blackJackTVLaunchIntent = new Intent("android.intent.action.MAIN");
-            blackJackTVLaunchIntent.setComponent(new ComponentName(
-                    "com.google.android.tv.blackjack",
-                    "com.google.android.tv.blackjack.BlackJackTableActivity"));
-            anymoteSender.sendIntent(blackJackTVLaunchIntent);
-        } else {
-            Toast.makeText(
-                    BlackJackRemoteActivity.this, "Waiting for connection", Toast.LENGTH_LONG);
-        }
+
+        // Send Intent to launch BlackJack app on Google TV through Anymote.
+        final Intent blackJackTVLaunchIntent = new Intent("android.intent.action.MAIN");
+        blackJackTVLaunchIntent.setComponent(new ComponentName(
+                "com.google.android.tv.blackjack",
+                "com.google.android.tv.blackjack.BlackJackTableActivity"));
+        anymoteSender.sendIntent(blackJackTVLaunchIntent);
 
         // Hide the progressBar once connection to Google TV is established.
         handler.post(new Runnable() {

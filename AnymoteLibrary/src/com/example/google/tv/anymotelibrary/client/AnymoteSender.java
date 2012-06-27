@@ -26,6 +26,9 @@ import com.google.anymote.device.DeviceAdapter;
 import com.google.anymote.device.MessageReceiver;
 
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 
 import com.example.google.tv.anymotelibrary.connection.AckManager;
@@ -46,10 +49,10 @@ public final class AnymoteSender implements MessageReceiver {
     private static final String LOG_TAG = AnymoteSender.class.getSimpleName();
 
     /** Data type used to send a string in a data message. */
-    public static final String DATA_TYPE_STRING = "com.google.tv.string";
+    private static final String DATA_TYPE_STRING = "com.google.tv.string";
 
     /** Device name used upon connection. */
-    public static final String DEVICE_NAME = "android";
+    private static final String DEVICE_NAME = "android";
 
     /** Manages connection to the server */
     private final ConnectingTask connectingTask;
@@ -66,7 +69,28 @@ public final class AnymoteSender implements MessageReceiver {
     /** Remote device protocol version number */
     private int deviceVersion;
 
+    private MessageSenderThread mMessageSenderThread;
+
+    private static final int KEY = 1;
+    private static final int KEYPRESS = 2;
+    private static final int SCROLL = 3;
+    private static final int DATA = 4;
+    private static final int URL = 5;
+    private static final int CLICK = 6;
+    private static final int MOUSEMOVE = 7;
+    private static final int CONNECT = 8;
+    private static final int PING = 9;
     
+    private class AnymoteKeyEvent {
+        Code code;
+        Action action;
+ 
+        AnymoteKeyEvent(Code code, Action action) {
+            this.code = code;
+            this.action = action;
+        }
+    }
+
     /**
      * Constructor
      * 
@@ -86,6 +110,8 @@ public final class AnymoteSender implements MessageReceiver {
                 onConnectionError();
             }
         }, this);
+        mMessageSenderThread = new MessageSenderThread();
+        mMessageSenderThread.start();
     }
 
     /**
@@ -143,7 +169,6 @@ public final class AnymoteSender implements MessageReceiver {
     }
 
     private void onConnectionError() {
-
         if (disconnect()) {
             connectingTask.onConnectionDisconnected();
         }
@@ -155,9 +180,10 @@ public final class AnymoteSender implements MessageReceiver {
      * @param action
      */
     public void sendClick(final Action action) {
-        if (deviceAdapter != null) {
-            deviceAdapter.sendKeyEvent(Code.BTN_MOUSE, action);
-        }
+        final Message msg = Message.obtain();
+        msg.obj = action;
+        msg.what = CLICK;
+        mMessageSenderThread.mHandler.sendMessage(msg);
     }
 
     /**
@@ -167,21 +193,23 @@ public final class AnymoteSender implements MessageReceiver {
      * @param url
      */
     public void sendUrl(final String url) {
-        if (deviceAdapter != null) {
-            deviceAdapter.sendFling(url, 0);
-        }
+        final Message msg = Message.obtain();
+        msg.obj = url;
+        msg.what = URL;
+        mMessageSenderThread.mHandler.sendMessage(msg);
     }
 
     /**
-     * Sends a sequence of keystrokes in String format to Anymote service. 
+     * Sends a sequence of keystrokes in String format to Anymote service.
      * Example input: "AHDFSDF".
      * 
      * @param url
      */
     public void sendData(final String data) {
-        if (deviceAdapter != null) {
-            deviceAdapter.sendData(DATA_TYPE_STRING, data);
-        }
+        final Message msg = Message.obtain();
+        msg.obj = data;
+        msg.what = URL;
+        mMessageSenderThread.mHandler.sendMessage(msg);
     }
 
     /**
@@ -210,9 +238,10 @@ public final class AnymoteSender implements MessageReceiver {
      * @param action The key up/down action.
      */
     public void sendKey(final Code keycode, final Action action) {
-        if (deviceAdapter != null) {
-            deviceAdapter.sendKeyEvent(keycode, action);
-        }
+        final Message msg = Message.obtain();
+        msg.obj = new AnymoteKeyEvent(keycode, action);
+        msg.what = KEY;
+        mMessageSenderThread.mHandler.sendMessage(msg);
     }
 
     /**
@@ -221,10 +250,10 @@ public final class AnymoteSender implements MessageReceiver {
      * @param key code of the key that was pressed.
      */
     public void sendKeyPress(final Code key) {
-        if (deviceAdapter != null) {
-            deviceAdapter.sendKeyEvent(key, Action.DOWN);
-            deviceAdapter.sendKeyEvent(key, Action.UP);
-        }
+        final Message msg = Message.obtain();
+        msg.obj = key;
+        msg.what = KEYPRESS;
+        mMessageSenderThread.mHandler.sendMessage(msg);
     }
 
     /**
@@ -236,9 +265,11 @@ public final class AnymoteSender implements MessageReceiver {
      *            mouse movement.
      */
     public void sendMoveRelative(final int deltaX, final int deltaY) {
-        if (deviceAdapter != null) {
-            deviceAdapter.sendMouseMove(deltaX, deltaY);
-        }
+        final Message msg = Message.obtain();
+        msg.arg1 = deltaX;
+        msg.arg2 = deltaY;
+        msg.what = MOUSEMOVE;
+        mMessageSenderThread.mHandler.sendMessage(msg);
     }
 
     /**
@@ -250,24 +281,73 @@ public final class AnymoteSender implements MessageReceiver {
      *            scroll movement.
      */
     public void sendScroll(final int deltaX, final int deltaY) {
-        if (deviceAdapter != null) {
-            deviceAdapter.sendMouseWheel(deltaX, deltaY);
-        }
+        final Message msg = Message.obtain();
+        msg.arg1 = deltaX;
+        msg.arg2 = deltaY;
+        msg.what = SCROLL;
+        mMessageSenderThread.mHandler.sendMessage(msg);
     }
 
     /**
      * Sends ping to Anymote service to monitor connection state.
      */
     public void sendPing() {
-        if (deviceAdapter != null) {
-            deviceAdapter.sendPing();
-        }
+        final Message msg = Message.obtain();
+        msg.what = PING;
+        mMessageSenderThread.mHandler.sendMessage(msg);
     }
 
     private void sendConnect() {
-        if (deviceAdapter != null) {
-            deviceAdapter.sendConnect(
-                    new ConnectInfo(DEVICE_NAME, connectingTask.getVersionCode()));
+        final Message msg = Message.obtain();
+        msg.what = CONNECT;
+        msg.obj = new ConnectInfo(DEVICE_NAME, connectingTask.getVersionCode());
+        mMessageSenderThread.mHandler.sendMessage(msg);
+    }
+
+    private class MessageSenderThread extends Thread {
+        public Handler mHandler;
+
+        public void run() {
+            Looper.prepare();
+
+            mHandler = new Handler() {
+                public void handleMessage(Message msg) {
+                    if (deviceAdapter == null)
+                        return;
+                    switch (msg.what) {
+                        case KEYPRESS:
+                            deviceAdapter.sendKeyEvent((Code) msg.obj, Action.DOWN);
+                            deviceAdapter.sendKeyEvent((Code) msg.obj, Action.UP);
+                            break;
+                        case MOUSEMOVE:
+                            deviceAdapter.sendMouseMove(msg.arg1, msg.arg2);
+                            break;
+                        case CLICK:
+                            deviceAdapter.sendKeyEvent(Code.BTN_MOUSE, (Action) msg.obj);
+                            break;
+                        case URL:
+                            deviceAdapter.sendFling((String)msg.obj, 0);
+                            break;
+                        case DATA:
+                            deviceAdapter.sendData(DATA_TYPE_STRING, (String)msg.obj);
+                            break;
+                        case KEY:
+                            final AnymoteKeyEvent keyEvent = (AnymoteKeyEvent)msg.obj;
+                            deviceAdapter.sendKeyEvent(keyEvent.code, keyEvent.action);
+                            break;
+                        case SCROLL:
+                            deviceAdapter.sendMouseWheel(msg.arg1, msg.arg2);
+                            break;
+                        case PING:
+                            deviceAdapter.sendPing();
+                            break;
+                        case CONNECT:
+                            deviceAdapter.sendConnect((ConnectInfo)msg.obj);
+                    }
+                }
+            };
+
+            Looper.loop();
         }
     }
 
