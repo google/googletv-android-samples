@@ -15,6 +15,7 @@
 package com.example.google.tv.anymotelibrary.client;
 
 import android.app.Service;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
@@ -141,7 +142,10 @@ public class AnymoteClientService extends Service implements ConnectionListener 
             return;
         }
 
-        Intent intent2 = new Intent(getBaseContext(), PairingActivity.class);
+        Intent intent2 = new Intent();
+        intent2.setComponent(new ComponentName(
+                getApplicationContext(),
+                "com.example.google.tv.anymotelibrary.connection.PairingActivity"));
         intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         getApplication().startActivity(intent2);

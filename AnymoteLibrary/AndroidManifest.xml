@@ -27,7 +27,7 @@
         </service>
 
         <activity
-            android:name=".PairingActivity"
+            android:name="com.example.google.tv.anymotelibrary.connection.PairingActivity"
             android:configChanges="orientation"
             android:label="Pairing with TV"
             android:launchMode="singleTop"

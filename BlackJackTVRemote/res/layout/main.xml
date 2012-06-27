@@ -31,11 +31,10 @@
             android:layout_width="200dip"
             android:layout_height="50dip"
             android:layout_gravity="center"
-            
             android:layout_marginTop="20dip"
             android:background="@drawable/background"
             android:text="Hit"
-             android:textColor="#fffaebd7"
+            android:textColor="#fffaebd7"
             android:textSize="22dp" />
 
         <Button
@@ -48,16 +47,16 @@
             android:text="Stand"
             android:textColor="#fffaebd7"
             android:textSize="22dp" />
-         <Button
+
+        <Button
             android:id="@+id/newgame"
-            android:layout_width="fill_parent"
+            android:layout_width="200dip"
             android:layout_height="50dip"
             android:layout_gravity="center"
-            android:layout_marginBottom="0dip"
-            android:layout_marginTop="320dip"
+            android:layout_marginTop="20dip"
             android:background="@drawable/background"
             android:text="Start Over"
-             android:textColor="#fffaebd7"
+            android:textColor="#fffaebd7"
             android:textSize="22dp" />
     </LinearLayout>
 
@@ -67,6 +66,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center" />
-   
 
 </FrameLayout>

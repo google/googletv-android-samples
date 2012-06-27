@@ -66,6 +66,7 @@ public final class AnymoteSender implements MessageReceiver {
     /** Remote device protocol version number */
     private int deviceVersion;
 
+    
     /**
      * Constructor
      * 
@@ -168,6 +169,18 @@ public final class AnymoteSender implements MessageReceiver {
     public void sendUrl(final String url) {
         if (deviceAdapter != null) {
             deviceAdapter.sendFling(url, 0);
+        }
+    }
+
+    /**
+     * Sends a sequence of keystrokes in String format to Anymote service. 
+     * Example input: "AHDFSDF".
+     * 
+     * @param url
+     */
+    public void sendData(final String data) {
+        if (deviceAdapter != null) {
+            deviceAdapter.sendData(DATA_TYPE_STRING, data);
         }
     }
 
