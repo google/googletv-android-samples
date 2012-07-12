@@ -99,7 +99,6 @@ public class AnymoteClientService extends Service implements ConnectionListener 
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.i("TAG" , "\n\n\n\n\n\noncreate called");
         initialize();
     }
 
