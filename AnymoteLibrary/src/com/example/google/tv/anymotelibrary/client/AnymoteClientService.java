@@ -51,6 +51,7 @@ public class AnymoteClientService extends Service implements ConnectionListener 
     private TvDiscoveryService tvDiscovery;
     private TvDevice target;
     private KeyStoreManager mKeyStoreManager;
+    private static AnymoteSender anymoteSender;
 
     /**
      * All client applications should implement this listener. It provides
@@ -76,7 +77,7 @@ public class AnymoteClientService extends Service implements ConnectionListener 
          * This callback method is called when there was a error in establishing
          * connection to the Anymote service.
          */
-        public void onConnectionError();
+        public void onConnectionFailed();
 
     }
 
@@ -98,7 +99,17 @@ public class AnymoteClientService extends Service implements ConnectionListener 
     @Override
     public void onCreate() {
         super.onCreate();
+        Log.i("TAG" , "\n\n\n\n\n\noncreate called");
         initialize();
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see android.app.Service#onStartCommand(android.content.Intent, int, int)
+     */
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+         return START_STICKY;
     }
 
     @Override
@@ -156,6 +167,7 @@ public class AnymoteClientService extends Service implements ConnectionListener 
      */
     @Override
     public void onConnectionDisconnected() {
+        this.anymoteSender = null;
         if (target != null) {
             for (ClientListener listener : clientListeners) {
                 listener.onDisconnected();
@@ -271,10 +283,15 @@ public class AnymoteClientService extends Service implements ConnectionListener 
      */
     public void onConnected(TvDevice device, AnymoteSender anymoteSender) {
         target = device;
+        this.anymoteSender = anymoteSender;
         // Broadcast new connection.
         for (ClientListener listener : clientListeners) {
             listener.onConnected(anymoteSender);
         }
+    }
+
+    public static AnymoteSender getAnymoteSender() {
+        return anymoteSender;
     }
 
     /**
@@ -299,8 +316,9 @@ public class AnymoteClientService extends Service implements ConnectionListener 
 
     @Override
     public void onConnectionFailed() {
+        this.anymoteSender = null;
         for (ClientListener listener : clientListeners) {
-            listener.onDisconnected();
+            listener.onConnectionFailed();
         }
     }
 

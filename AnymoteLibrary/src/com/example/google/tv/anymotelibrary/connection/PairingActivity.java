@@ -116,7 +116,6 @@ public class PairingActivity extends Activity
 
     public void onPairingCodeRequired(
             final PairingPINDialogBuilder.PinListener pairingPINListener) {
-        Log.i("\n\nTAG", "\n\nPairingcode required");
         mHandler.post(new Runnable() {
             public void run() {
                 PairingPINDialogBuilder mPinDialogBuilder =
